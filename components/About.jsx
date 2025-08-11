@@ -58,7 +58,7 @@ const About = () => {
                     <div className="relative">
                         <div className="relative z-10">
                             <img
-                                src="https://images.pexels.com/photos/5212700/pexels-photo-5212700.jpeg?auto=compress&cs=tinysrgb&w=800"
+                                src="/mission.jpg"
                                 alt="Educational consulting"
                                 className="rounded-2xl shadow-2xl w-full"
                             />
@@ -69,7 +69,7 @@ const About = () => {
                 </div>
 
                 {/* Inspirational Quote */}
-                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-12 mb-20 text-white relative overflow-hidden">
+                <div className="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 md:p-12 mb-20 text-white relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-y-32 translate-x-32"></div>
                     <div className="absolute bottom-0 left-0 w-48 h-48 bg-white opacity-5 rounded-full translate-y-24 -translate-x-24"></div>
                     <div className="relative z-10">

@@ -16,8 +16,13 @@ const Footer = () => {
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div className="space-y-4">
                         <div className="flex items-center space-x-2">
-                            <GraduationCap className="h-8 w-8 text-blue-400" />
-                            <span className="text-2xl font-bold">ORA CONSULTS</span>
+                            <img
+                                src="/ora.png"
+                                alt="Ora Logo"
+                                className='w-12 h-10 md:w-16 rounded-md md:h-12 object-contain hover:opacity-80 transition-opacity'
+                            />
+                            {/* <GraduationCap className="h-8 w-8 text-blue-400" />
+                            <span className="text-2xl font-bold">ORA CONSULTS</span> */}
                         </div>
                         <p className="text-gray-300 leading-relaxed">
                             Empowering African students with global academic opportunities. Your trusted partner in achieving educational excellence abroad.

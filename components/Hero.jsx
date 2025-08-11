@@ -104,7 +104,7 @@ const Hero = () => {
               {/* Main Image */}
               <div className="relative overflow-hidden rounded-2xl shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1000&q=80"
+                  src="/africans.jpg"
                   alt="Students collaborating on international education"
                   className="w-full h-full object-cover"
                 />
@@ -112,7 +112,7 @@ const Hero = () => {
               </div>
 
               {/* Success Badge */}
-              <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+              {/* <div className="absolute top-6 left-6 bg-white/95 backdrop-blur-sm rounded-xl p-4 shadow-lg">
                 <div className="flex items-center space-x-3">
                   <div className="bg-green-500 rounded-full p-2">
                     <CheckCircle className="h-4 w-4 text-white" />
@@ -122,15 +122,15 @@ const Hero = () => {
                     <div className="text-lg font-bold text-green-600">95%</div>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Countries Badge */}
-              <div className="absolute bottom-6 right-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-4 shadow-lg">
+              {/* <div className="absolute bottom-6 right-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl p-4 shadow-lg">
                 <div className="text-center">
                   <div className="text-2xl font-bold">6+</div>
                   <div className="text-sm font-medium opacity-90">Countries</div>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Decorative Background Elements */}
