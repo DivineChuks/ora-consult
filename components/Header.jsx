@@ -49,7 +49,7 @@ const Header = () => {
             </div> */}
             <div className="flex items-center space-x-3 mb-3">
               <img
-                src="/ora.png"
+                src="/ore.png"
                 alt="Ora Logo"
                 className='w-12 h-10 md:w-16 rounded-md md:h-12 object-contain hover:opacity-80 transition-opacity'
               />
