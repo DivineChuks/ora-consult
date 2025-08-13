@@ -102,7 +102,7 @@ const Footer = () => {
                                 </li>
                                 <li>
                                     <button className="text-gray-300 hover:text-white transition-colors text-left">
-                                        Why take IELTS with IDP?
+                                        Why take IELTS with Ora Consults?
                                     </button>
                                 </li>
                                 <li>
