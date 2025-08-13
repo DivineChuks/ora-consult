@@ -1,6 +1,24 @@
 "use client"
 import React, { useState } from 'react';
-import { Mail, Phone, Clock, Send, MapPin } from 'lucide-react';
+import { Mail, Phone, Clock, Send, MapPin, CheckCircle, XCircle, X } from 'lucide-react';
+
+const Toast = ({ message, type, onClose }) => {
+  const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
+  const Icon = type === 'success' ? CheckCircle : XCircle;
+
+  return (
+    <div className={`fixed top-4 right-4 ${bgColor} text-white px-6 py-4 rounded-lg shadow-lg z-50 flex items-center space-x-3 min-w-96 animate-in slide-in-from-top-2`}>
+      <Icon className="h-5 w-5 flex-shrink-0" />
+      <p className="flex-1 text-sm font-medium">{message}</p>
+      <button
+        onClick={onClose}
+        className="text-white hover:text-gray-200 transition-colors"
+      >
+        <X className="h-4 w-4" />
+      </button>
+    </div>
+  );
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,23 +28,67 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Contact form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({ name: '', email: '', subject: '', message: '' });
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message, type) => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 5000);
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Create FormData from form fields
+    const data = new FormData();
+    data.append('name', formData.name);
+    data.append('email', formData.email);
+    data.append('subject', formData.subject);
+    data.append('message', formData.message);
+
+    try {
+      const res = await fetch("https://formspree.io/f/movlroyn", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+
+      if (res.ok) {
+        showToast("Thank you for your message! We will get back to you soon.", "success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        const err = await res.json().catch(() => ({}));
+        console.error("Formspree error:", err);
+        showToast("Sorry, something went wrong. Please try again later.", "error");
+      }
+    } catch (error) {
+      console.error(error);
+      showToast("Network error. Please check your connection and try again.", "error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <section id="contact" className="py-20 bg-gray-50">
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contact ORA CONSULTS</h2>
@@ -109,7 +171,7 @@ const Contact = () => {
           <div className="bg-white p-8 rounded-xl shadow-sm">
             <h3 className="text-2xl font-semibold text-gray-900 mb-6">Send Us a Message</h3>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <div onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="contact-name" className="block text-sm font-medium text-gray-700 mb-2">
                   Name *
@@ -121,7 +183,7 @@ const Contact = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
                   placeholder="Your full name"
                 />
               </div>
@@ -137,7 +199,7 @@ const Contact = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
                   placeholder="Your email address"
                 />
               </div>
@@ -153,7 +215,7 @@ const Contact = () => {
                   required
                   value={formData.subject}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
                   placeholder="What is this regarding?"
                 />
               </div>
@@ -169,19 +231,29 @@ const Contact = () => {
                   required
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800 resize-none"
                   placeholder="Tell us how we can help you..."
                 />
               </div>
 
               <button
-                type="submit"
-                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center justify-center space-x-2"
+                onClick={handleSubmit}
+                disabled={isSubmitting}
+                className="w-full bg-blue-600 cursor-pointer text-white px-6 py-3 rounded-lg hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all font-semibold flex items-center justify-center space-x-2"
               >
-                <Send className="h-5 w-5" />
-                <span>Send Message</span>
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-white border-t-transparent"></div>
+                    <span>Sending...</span>
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-5 w-5" />
+                    <span>Send Message</span>
+                  </>
+                )}
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
