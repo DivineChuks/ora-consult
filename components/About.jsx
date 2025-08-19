@@ -58,7 +58,7 @@ const About = () => {
                     <div className="relative">
                         <div className="relative z-10">
                             <img
-                                src="/mission.jpg"
+                                src="/young.jpg"
                                 alt="Educational consulting"
                                 className="rounded-2xl shadow-2xl w-full"
                             />
