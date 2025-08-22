@@ -104,7 +104,7 @@ const Hero = () => {
               {/* Main Image */}
               <div className="relative overflow-hidden rounded-2xl shadow-2xl">
                 <img
-                  src="/student.jpg"
+                  src="/woman.jpg"
                   alt="Students collaborating on international education"
                   className="w-full h-full object-cover"
                 />
