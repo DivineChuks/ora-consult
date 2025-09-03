@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react';
-import { Mail, Phone, Clock, Send, MapPin, CheckCircle, XCircle, X } from 'lucide-react';
+import { Mail, Phone, Clock, Send, MapPin, CheckCircle, XCircle, X, Locate } from 'lucide-react';
 
 const Toast = ({ message, type, onClose }) => {
   const bgColor = type === 'success' ? 'bg-green-500' : 'bg-red-500';
@@ -135,11 +135,20 @@ const Contact = () => {
 
                 <div className="flex items-start space-x-4">
                   <div className="bg-orange-100 p-3 rounded-lg">
-                    <MapPin className="h-6 w-6 text-orange-600" />
+                    <Locate className="h-6 w-6 text-orange-600" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-gray-900">Location</h4>
                     <p className="text-gray-600">Based in Africa, serving students globally</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4">
+                  <div className="bg-blue-100 p-3 rounded-lg">
+                    <MapPin className="h-6 w-6 text-blue-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-gray-900">Head Office</h4>
+                    <p className="text-gray-600">Abuja, Nigeria</p>
                   </div>
                 </div>
               </div>
